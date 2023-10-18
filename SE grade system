@@ -1,0 +1,113 @@
+"""
+Created on Fri Oct 13 21:43:45 2023
+
+@author: asus# -*- coding: utf-8 -*-
+"""
+import matplotlib.pyplot as plt
+
+Dict = {}
+Pavg = 0
+Savg = 0
+Lavg= 0
+
+subject = {} # subject dict for nested dict
+sub = input('Enter the subject name: ')   #subject name
+sh = int(input('Enter PRACTICE-SRO(1) or LEC-PRACTICE/(LAB)-SRO(2): '))
+    
+if sh == 1:
+    PRA = input('Enter the PRACTICE scores with spaces: ').split()
+    PRA = [int(x) for x in PRA]
+    subject['Practice']= PRA
+    Psum = sum([int(score) for score in PRA])
+    Pavg = Psum / len(PRA)
+
+    SRO=input('Enter the SRO scores with spaces: ').split()
+    SRO = [int(x) for x in SRO]
+    subject['SRO'] = SRO
+    Ssum = sum([int(score) for score in SRO])
+    Savg = Ssum / len(SRO)
+
+    An = Pavg * 0.7 + Savg * 0.3
+#pie plot    
+    slices = [Psum*0.7, Ssum*0.3]
+    labels =['Practice','SRO',]
+    colours = ['blue', 'yellow']
+
+    plt.pie(slices, labels=labels, colors=colours, shadow=True)
+
+    plt.title('Scores around piechart for subject')
+    plt.show()
+
+# choose one variant
+if sh == 2:
+    LEC = input('Enter the LECTURE scores with spaces: ').split()
+    LEC = [int(x) for x in LEC]
+    subject['Lecture'] = LEC
+    
+    Lsum = sum([int(score) for score in LEC])
+    Lavg = Lsum / len(LEC)
+
+    PRA=input('Enter the PRACTICE scores with spaces: ').split()
+    PRA = [int(x) for x in PRA]
+    subject['Practice'] = PRA
+        
+    Psum = sum([int(score) for score in PRA])
+    Pavg = Psum / len(PRA)
+
+    SRO=input('Enter the SRO scores with spaces: ').split()
+    SRO = [int(x) for x in SRO]
+    subject['SRO'] = SRO
+    
+    Ssum = sum([int(score) for score in SRO])
+    Savg = Ssum / len(SRO)
+
+    An = Pavg * 0.5 + Savg * 0.3 + Lavg *0.2
+#pie plot     
+    slices = [Psum*0.5, Ssum*0.3, Lsum*0.2]
+    labels =['Practice','SRO','Lection']
+    colours = ['blue', 'yellow', 'green']
+
+    plt.pie(slices, labels=labels, colors=colours, shadow=True)
+
+    plt.title('Scores around piechart for subject')
+    plt.show()
+
+#predict
+print('Your pre MID score', round(An)) 
+
+a = 0
+RKA = 0
+
+while RKA < 100 and a!=1:
+    RK = int(input('Enter the final score that u wish to have in 1stMID: '))
+    RKA = (RK-round(An)*0.6)/0.4
+    if RKA <= 100:
+        print('Your should gain in 1stMidterm exam: ', round(RKA))
+        a += 1
+    else:
+        print('Your desired RKA is too high. Please try again.', RKA)
+   
+
+# Marking with letters
+if RKA >= 94: 
+    subject['Letter-mark'] = 'A'
+elif RKA >= 90:
+    subject['Letter-mark'] = '-A'
+elif RKA >= 85:
+    subject['Letter-mark'] = 'B+' 
+elif RKA >= 80:
+    subject['Letter-mark'] = 'B'
+elif RKA >= 75:
+    subject['Letter-mark'] = '-B' 
+elif RKA >= 70:
+    subject['Letter-mark'] = 'C+' 
+elif RKA >= 65:
+    subject['Letter-mark'] = 'C' 
+elif RKA >= 60:
+    subject['Letter-mark'] = '-C'  
+else:
+    subject['Letter-mark'] = 'Total bad'
+    
+#result dictionary
+Dict[sub]=subject
+print(Dict)
