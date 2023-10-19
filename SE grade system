@@ -78,13 +78,13 @@ print('Your pre MID score', round(An))
 a = 0
 RKA = 0
 
-while RKA < 100 and a!=1:
+while a!=1:
     RK = int(input('Enter the final score that u wish to have in 1stMID: '))
     RKA = (RK-round(An)*0.6)/0.4
     if RKA <= 100:
         print('Your should gain in 1stMidterm exam: ', round(RKA))
         a += 1
-    else:
+   if RKA > 100:
         print('Your desired RKA is too high. Please try again.', RKA)
    
 
